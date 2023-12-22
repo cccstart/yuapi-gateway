@@ -1,0 +1,29 @@
+server:
+  port: 8090
+spring:
+  cloud:
+    gateway:
+      default-filters:
+        - AddResponseHeader=source, yupi
+      routes:
+        - id: api_route
+#          uri: http://114.132.63.217:8123
+          uri: http://localhost:8123
+          predicates:
+          - Path=/api/**
+logging:
+  level:
+    org:
+      springframework:
+        cloud:
+          gateway: trace
+dubbo:
+  application:
+    name: dubbo-springboot-demo-provider
+  protocol:
+    name: dubbo
+    port: 22223
+  registry:
+    id: nacos-registry
+#    address: nacos://114.132.63.217:8848
+    address: nacos://localhost:8848
